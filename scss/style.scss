@@ -1,0 +1,131 @@
+@import "./variables";
+@import "../scss-bootstrap/bootstrap";
+body {
+  font-family: cursive;
+
+}
+
+/* Navbar */
+.navbar-dark {
+  .navbar-nav .nav-link {
+    position: relative;
+    transition: 0.3s;
+    
+    &::before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: 0;
+      left: 0;
+      background-color: $blue;
+      transition: inherit;
+    }
+
+    &.active,
+    &:hover {
+      color: $blue;
+      &::before {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+/* Header */
+#header {
+  height: 75vh;
+  background: url("../images/Developer at Work.png") center center/cover;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: transparentize(#000000, 0.4);
+  }
+}
+
+/* Modal */
+#exampleModal {
+  .modal-content {
+    background-color: transparentize(#000000, 0.4);
+    border: none;
+  }
+  .modal-body {
+    padding: 0;
+  }
+}
+
+/* 2. الأقسام والخلفية الداكنة */
+.bg-section,
+.progress-div,
+section {
+  background-color: #161a23 !important;
+}
+
+.icon-container {
+  width: 70px;
+  height: 70px;
+}
+
+/* 3. تنسيق أشرطة التقدّم (Progress Bars) */
+.progress {
+  background-color: #212631 !important;
+  height: 12px !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.progress-bar {
+  transition: 0.5s ease;
+  background: linear-gradient(90deg, #ff0000, #dc3545) !important;
+}
+
+/* 4. تحسين خُانات فورم الاتصال (Contact Form) */
+.form-control {
+  background-color: #0f1117 !important;
+  border: 1px solid #282f3d !important;
+  color: #ffffff !important;
+  padding: 12px 16px;
+  border-radius: 8px !important;
+
+  &:focus {
+    background-color: #161a23 !important;
+    border-color: #ff0000 !important;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.35) !important;
+    color: #ffffff !important;
+  }
+
+  &::placeholder {
+    color: #eaecee !important;
+  }
+}
+
+/* 5. تنسيق صورة البروفايل والتوهج الأحمر */
+.profile-glow-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.profile-glow-img {
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ff0000;
+  box-shadow: 0 0 25px #ff0000, 
+              0 0 50px rgba(255, 0, 0, 0.5), 
+              0 0 75px rgba(255, 0, 0, 0.3);
+}
+
+@media (min-width: 992px) {
+  .profile-glow-img {
+    width: 340px;
+    height: 340px;
+  }
+}

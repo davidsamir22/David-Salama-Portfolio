@@ -1,0 +1,122 @@
+@charset "UTF-8";
+/* 1. توحيد خلفية الموقع ونوع الخط الاحترافي */
+body {
+  font-family: cursive;
+}
+
+/* Navbar */
+.navbar-dark .navbar-nav .nav-link {
+  position: relative;
+  transition: 0.3s;
+}
+.navbar-dark .navbar-nav .nav-link::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background-color: #f70202;
+  transition: inherit;
+}
+.navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link:hover {
+  color: #f70202;
+}
+.navbar-dark .navbar-nav .nav-link.active::before, .navbar-dark .navbar-nav .nav-link:hover::before {
+  width: 100%;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+/* Header */
+#header {
+  height: 75vh;
+  background: url("../images/Developer at Work.png") center center/cover;
+  position: relative;
+}
+#header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Modal */
+#exampleModal .modal-content {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: none;
+}
+#exampleModal .modal-body {
+  padding: 0;
+}
+
+/* 2. الأقسام والخلفية الداكنة */
+.bg-section,
+.progress-div,
+section {
+  background-color: #161a23 !important;
+}
+
+.icon-container {
+  width: 70px;
+  height: 70px;
+}
+
+/* 3. تنسيق أشرطة التقدّم (Progress Bars) */
+.progress {
+  background-color: #212631 !important;
+  height: 12px !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.progress-bar {
+  transition: 0.5s ease;
+  background: linear-gradient(90deg, #ff0000, #dc3545) !important;
+}
+
+/* 4. تحسين خُانات فورم الاتصال (Contact Form) */
+.form-control {
+  background-color: #0f1117 !important;
+  border: 1px solid #282f3d !important;
+  color: #ffffff !important;
+  padding: 12px 16px;
+  border-radius: 8px !important;
+}
+.form-control:focus {
+  background-color: #161a23 !important;
+  border-color: #ff0000 !important;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.35) !important;
+  color: #ffffff !important;
+}
+.form-control::-moz-placeholder {
+  color: #eaecee !important;
+}
+.form-control::placeholder {
+  color: #eaecee !important;
+}
+
+/* 5. تنسيق صورة البروفايل والتوهج الأحمر */
+.profile-glow-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.profile-glow-img {
+  width: 260px;
+  height: 260px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ff0000;
+  box-shadow: 0 0 25px #ff0000, 0 0 50px rgba(255, 0, 0, 0.5), 0 0 75px rgba(255, 0, 0, 0.3);
+}
+
+@media (min-width: 992px) {
+  .profile-glow-img {
+    width: 340px;
+    height: 340px;
+  }
+}/*# sourceMappingURL=main.css.map */
