@@ -30,3 +30,78 @@ window.addEventListener("scroll", function () {
         
     }
 })
+// 1. إغلاق القائمة عند الضغط خارج الـ Navbar
+document.addEventListener('click', function (event) {
+    const navbarCollapse = document.getElementById('navbarNav');
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    
+    // التأكد من أن القائمة مفتوحة وأن الضغط تم خارج القائمة وزر التبديل
+    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+        if (!navbarCollapse.contains(event.target) && !navbarToggler.contains(event.target)) {
+            const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse);
+            bsCollapse.hide();
+        }
+    }
+});
+
+// 2. إغلاق القائمة تلقائياً عند الضغط على أي رابط داخلها (Nav Link)
+document.querySelectorAll('.nav-link').forEach(function (link) {
+    link.addEventListener('click', function () {
+        const navbarCollapse = document.getElementById('navbarNav');
+        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+            const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse);
+            bsCollapse.hide();
+        }
+    });
+});
+
+document.querySelectorAll('a.nav-link[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        
+        if (targetId && targetId !== '#') {
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                e.preventDefault(); // منع القفز الافتراضي
+                
+                // حساب ارتفاع الـ Navbar تلقائياً على أي شاشة
+                const navbar = document.querySelector('.navbar');
+                const navbarHeight = navbar ? navbar.offsetHeight : 80;
+                
+                // حساب موقع السكشن بدقة مع خصم ارتفاع الـ Navbar
+                const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                const offsetPosition = elementPosition - navbarHeight - 15; // 15px مسافة جمالية للأعلى
+
+                // الانتقال السلس للمكان الصحيح
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    });
+});
+
+document.addEventListener('click', function (event) {
+    const navbarCollapse = document.getElementById('navbarNav');
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    
+    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+        if (!navbarCollapse.contains(event.target) && !navbarToggler.contains(event.target)) {
+            const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse);
+            bsCollapse.hide();
+        }
+    }
+});
+
+// إغلاق القائمة عند الضغط على أي رابط
+document.querySelectorAll('.nav-link').forEach(function (link) {
+    link.addEventListener('click', function () {
+        const navbarCollapse = document.getElementById('navbarNav');
+        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+            const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse);
+            bsCollapse.hide();
+        }
+    });
+});
