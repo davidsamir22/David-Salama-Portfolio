@@ -29,54 +29,39 @@ body {
   box-shadow: none;
 }
 
-/* Header */
-/* 1. ضبط ارتفاع الهيدر للموبايل والكمبيوتر */
+/* ==========================================
+   تنسيق الهيدر المعدل (حل مشكلة خروج الأزرار)
+   ========================================== */
 #header {
   min-height: 100vh;
   height: auto;
   background: url("../images/Developer at Work.png") center center/cover;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 #header::before {
   content: "";
   position: absolute;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+#header {
+  /* إلغاء تقييد h-100 ليتمدد الهيدر تلقائياً مع المحتوى */
+}
+#header .container {
+  height: auto !important;
+  position: relative;
+  z-index: 2;
 }
 
-/* 2. تحديد الخطوط بدقة (Oswald للعناوين والأزرار / Poppins للفقرات) */
-h1, h2, h3, h4, h5, h6, .navbar-brand, .nav-link, .btn {
-  font-family: "Oswald", sans-serif !important;
-  letter-spacing: 0.5px;
-}
-
-p, span, li, .header-bio {
-  font-family: "Poppins", sans-serif !important;
-}
-
-.header-bio {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  font-weight: 300;
-}
-
-/* 3. Media Query المخصصة للموبايل */
+/* ضبط المساحات والأبعاد للموبايل */
 @media (max-width: 768px) {
   #header {
-    padding-top: 100px !important;
-    padding-bottom: 50px !important;
-  }
-  .header-bio {
-    font-size: 0.92rem !important;
-    line-height: 1.6 !important;
-    padding: 0 10px !important;
-  }
-  .profile-glow-img {
-    width: 210px !important;
-    height: 210px !important;
-  }
-  .header-btns .btn {
-    width: 100% !important;
+    min-height: 100vh;
+    padding-top: 110px !important; /* مسافة علوية أسفل الناف بار */
+    padding-bottom: 70px !important; /* مسافة أمان سفلية تضمن احتواء الأزرار بالكامل */
   }
 }
 /* 2. الأقسام والخلفية الداكنة */
