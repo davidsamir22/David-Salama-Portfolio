@@ -1,9 +1,19 @@
 @charset "UTF-8";
-body {
-  font-family: "Oswald", sans-serif !important;
+/* =========================================================
+   1. الخطوط العامة للموقع
+   ========================================================= */
+body, p, span, li, a {
+  font-family: "Poppins", sans-serif !important;
 }
 
-/* Navbar */
+h1, h2, h3, h4, h5, h6, .navbar-brand, .nav-link, .btn {
+  font-family: "Oswald", sans-serif !important;
+  letter-spacing: 0.8px;
+}
+
+/* =========================================================
+   2. شريط التنقل (Navbar)
+   ========================================================= */
 .navbar-dark .navbar-nav .nav-link {
   position: relative;
   transition: 0.3s;
@@ -29,9 +39,9 @@ body {
   box-shadow: none;
 }
 
-/* ==========================================
-   تنسيق الهيدر المعدل (حل مشكلة خروج الأزرار)
-   ========================================== */
+/* =========================================================
+   3. الهيدر (Header Section)
+   ========================================================= */
 #header {
   min-height: 100vh;
   height: auto;
@@ -47,24 +57,15 @@ body {
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 1;
 }
-#header {
-  /* إلغاء تقييد h-100 ليتمدد الهيدر تلقائياً مع المحتوى */
-}
 #header .container {
   height: auto !important;
   position: relative;
   z-index: 2;
 }
 
-/* ضبط المساحات والأبعاد للموبايل */
-@media (max-width: 768px) {
-  #header {
-    min-height: 100vh;
-    padding-top: 110px !important; /* مسافة علوية أسفل الناف بار */
-    padding-bottom: 70px !important; /* مسافة أمان سفلية تضمن احتواء الأزرار بالكامل */
-  }
-}
-/* 2. الأقسام والخلفية الداكنة */
+/* =========================================================
+   4. الأقسام والعناصر
+   ========================================================= */
 .bg-section,
 .progress-div,
 section {
@@ -76,7 +77,7 @@ section {
   height: 70px;
 }
 
-/* 3. تنسيق أشرطة التقدّم (Progress Bars) */
+/* أشرطة التقدّم (Progress Bars) */
 .progress {
   background-color: #212631 !important;
   height: 12px !important;
@@ -89,7 +90,7 @@ section {
   background: linear-gradient(90deg, #ff0000, #dc3545) !important;
 }
 
-/* 4. تحسين خُانات فورم الاتصال (Contact Form) */
+/* فورم الاتصال (Contact Form) */
 .form-control {
   background-color: #0f1117 !important;
   border: 1px solid #282f3d !important;
@@ -110,7 +111,9 @@ section {
   color: #eaecee !important;
 }
 
-/* 5. تنسيق صورة البروفايل والتوهج الأحمر */
+/* =========================================================
+   5. صورة البروفايل والتوهج الأحمـر (Desktop)
+   ========================================================= */
 .profile-glow-wrapper {
   display: inline-block;
   position: relative;
@@ -119,74 +122,58 @@ section {
 .profile-glow-img {
   width: 260px;
   height: 260px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: 50%;
+  aspect-ratio: 1/1 !important;
+  -o-object-fit: cover !important;
+     object-fit: cover !important;
+  border-radius: 50% !important;
   border: 3px solid #ff0000;
   box-shadow: 0 0 25px #ff0000, 0 0 50px rgba(255, 0, 0, 0.5), 0 0 75px rgba(255, 0, 0, 0.3);
 }
 
 @media (min-width: 992px) {
   .profile-glow-img {
-    width: 340px;
-    height: 340px;
+    width: 340px !important;
+    height: 340px !important;
   }
 }
-/* تطبيق خط Oswald على العناوين والناڤ بار */
-h1, h2, h3, h4, h5, h6, .navbar-brand, .nav-link, .btn {
-  font-family: "Oswald", sans-serif !important;
-  letter-spacing: 0.5px; /* تحسين المسافة بين الحروف */
-}
-
-/* تطبيق خط Poppins ناعم ومريح للعين على النصوص الطويلة والفقرات */
-p, span, li {
-  font-family: "Poppins", sans-serif !important;
-}
-
 /* =========================================================
-   1. فصل الخطوط: Oswald للعناوين فقط - Poppins للفقرات
-   ========================================================= */
-body, p, span, li, a {
-  font-family: "Poppins", sans-serif !important; /* خط خفيف ومريح للفقرات */
-}
-
-h1, h2, h3, h4, h5, h6, .navbar-brand, .nav-link {
-  font-family: "Oswald", sans-serif !important; /* خط قوي للأنوان والناڤ بار */
-  letter-spacing: 0.8px;
-}
-
-/* =========================================================
-   2. تنسيق الموبايل (Media Query)
+   6. تنسيقات الشاشات الصغيرة والموبايل (Media Query)
    ========================================================= */
 @media (max-width: 768px) {
-  /* تصغير حجم الصورة قليلاً على الموبايل */
-  #header img, section img {
-    max-width: 200px !important;
+  #header {
+    padding-top: 90px !important;
+    padding-bottom: 60px !important;
   }
-  /* ضبط حجم ونطاق العنوان الرئيسي */
-  #header h1, #header h2 {
+  /* ضمان دائرية الصورة وتساوي العرض والارتفاع بدون تعارض */
+  .profile-glow-img {
+    width: 250px !important;
+    height: 250px !important;
+    max-width: 75vw !important;
+    max-height: 75vw !important;
+    aspect-ratio: 1/1 !important;
+    -o-object-fit: cover !important;
+       object-fit: cover !important;
+    border-radius: 50% !important;
+  }
+  #header h1, #header h2, #header h3 {
     font-size: 1.7rem !important;
     line-height: 1.3 !important;
   }
-  /* ضبط الفقرة لتصبح واسعة ومريحة في القراءة */
   #header p {
     font-size: 0.88rem !important;
     line-height: 1.6 !important;
     font-weight: 300 !important;
     padding: 0 10px !important;
   }
-  /* ترتيب الأزرار تحت بعضها لتفادي التداخل والنص المختفي */
   #header .d-flex {
     flex-direction: column !important;
     align-items: center !important;
     gap: 12px !important;
   }
-  /* ضبط مقاس الزرار على الموبايل */
   #header .btn {
     width: 85% !important;
     max-width: 260px !important;
     padding: 10px !important;
     font-size: 0.9rem !important;
-    font-family: "Oswald", sans-serif !important;
   }
 }/*# sourceMappingURL=main.css.map */
