@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DAVID-TECH</title>
+  <title>DAVID-SALAMA-PORTO</title>
   <!-- استدعاء خط Oswald من Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,7 +64,7 @@
           </h3>
           
           <!-- تم التعديل من h6 إلى p لتطبيق خط Poppins المريح -->
-          <p class="header-bio text-white text-opacity-75 my-3">
+          <p class="header-bio fs-5  text-white text-opacity-75 my-3">
             I am a <span class="text-primary fw-bold">.NET Full Stack Developer</span> with a passion for creating
             innovative and user-friendly web applications. I specialize in building responsive and scalable
             solutions that meet the needs of businesses and individuals alike.
@@ -471,34 +471,32 @@
         <!-- Contact Form -->
         <div class="col-lg-7">
           <div class="bg-dark p-4 rounded-4 shadow border border-secondary border-opacity-25">
-            <form action="https://formsubmit.co/davidsamir789@gmail.com" method="POST">
-              <div class="row g-3">
-                <div class="col-md-6">
-                  <h3 class="text-white d-flex justify-content-center mb-4">Wanna Start A New Project?</h3>
-                  <input type="text" name="name"
-                    class="form-control bg-black text-white border-secondary border-opacity-50 py-2"
-                    placeholder="Your Name" required>
-                </div>
-                <div class="col-md-6">
-                  <input type="email" name="email"
-                    class="form-control bg-black text-white border-secondary border-opacity-50 py-2"
-                    placeholder="Your Email" required>
-                </div>
-                <div class="col-12">
-                  <input type="text" name="subject"
-                    class="form-control bg-black text-white border-secondary border-opacity-50 py-2"
-                    placeholder="Subject">
-                </div>
-                <div class="col-12">
-                  <textarea name="message"
-                    class="form-control bg-black text-white border-secondary border-opacity-50 py-2" rows="4"
-                    placeholder="Your Message" required></textarea>
-                </div>
-                <div class="col-12">
-                  <button type="submit" class="btn btn-primary text-white py-2 px-4 fw-bold">Send Message</button>
-                </div>
-              </div>
-            </form>
+            <!-- Contact Form -->
+<form id="contactForm" action="https://formsubmit.co/ajax/davidsamir789@gmail.com" method="POST">
+  <div class="row g-3">
+    <div class="col-12">
+      <h3 class="text-white d-flex justify-content-center mb-2 fw-bold">Wanna Start A New Project?</h3>
+    </div>
+    <div class="col-md-6">
+      <input type="text" name="name" class="form-control bg-black text-white border-secondary border-opacity-50 py-2" placeholder="Your Name" required>
+    </div>
+    <div class="col-md-6">
+      <input type="email" name="email" class="form-control bg-black text-white border-secondary border-opacity-50 py-2" placeholder="Your Email" required>
+    </div>
+    <div class="col-12">
+      <input type="text" name="subject" class="form-control bg-black text-white border-secondary border-opacity-50 py-2" placeholder="Subject">
+    </div>
+    <div class="col-12">
+      <textarea name="message" class="form-control bg-black text-white border-secondary border-opacity-50 py-2" rows="4" placeholder="Your Message" required></textarea>
+    </div>
+    <div class="col-12">
+      <button id="submitBtn" type="submit" class="btn btn-primary text-white py-2 px-4 fw-bold d-flex align-items-center justify-content-center gap-2">
+        <span id="btnText">Send Message</span>
+        <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</form>
           </div>
         </div>
       </div>
@@ -507,10 +505,30 @@
 
 
 
-
+<!-- Success Pop-up Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-white border border-secondary border-opacity-50 shadow-lg" style="border-radius: 16px;">
+      <div class="modal-header border-bottom border-secondary border-opacity-25 justify-content-center">
+        <h5 class="modal-title text-primary fw-bold fs-4" id="successModalLabel">
+          <i class="bi bi-check-circle-fill me-2 text-success"></i>Message Sent!
+        </h5>
+      </div>
+      <div class="modal-body text-center py-4">
+        <p class="fs-5 mb-2 fw-semibold">Thank you for reaching out!</p>
+        <p class="text-white text-opacity-75 mb-0">Your message has been received successfully. I will get back to you as soon as possible.</p>
+      </div>
+      <div class="modal-footer border-top border-secondary border-opacity-25 justify-content-center">
+        <button type="button" class="btn btn-primary px-4 fw-bold" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
   <script src="./js/scrollOut.js"></script>
   <script src="./js/bootstrap.bundle.js"></script>
   <script src="./js/main.js"></script>
+  
+  
 </body>
 
 </html>

@@ -78,7 +78,10 @@ document.querySelectorAll('.nav-link').forEach(function (link) {
 });
 
 // 4. تفعيل زر السكشن النشط (Active Link) تلقائياً أثناء السكرول
-window.addEventListener('scroll', function () {
+// =========================================================
+// تحديث الزر النشط (Active Link) فور فتح الصفحة وأثناء السكرول
+// =========================================================
+function updateActiveNavLink() {
     const sections = document.querySelectorAll('section[id], header[id]');
     const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
     const navbar = document.querySelector('.navbar');
@@ -86,14 +89,19 @@ window.addEventListener('scroll', function () {
 
     let currentSectionId = '';
 
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - navbarHeight - 60;
-        const sectionHeight = section.offsetHeight;
+    // إذا كنا في أعلى الصفحة، تحديد قسم الهيدر (Home) افتراضياً
+    if (window.scrollY < 100) {
+        currentSectionId = 'header';
+    } else {
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - navbarHeight - 60;
+            const sectionHeight = section.offsetHeight;
 
-        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-            currentSectionId = section.getAttribute('id');
-        }
-    });
+            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                currentSectionId = section.getAttribute('id');
+            }
+        });
+    }
 
     navLinks.forEach(link => {
         link.classList.remove('active');
@@ -101,4 +109,55 @@ window.addEventListener('scroll', function () {
             link.classList.add('active');
         }
     });
-});
+}
+
+// تشغيل الدالة فور فتح/تحميل الصفحة وأثناء السكرول
+window.addEventListener('scroll', updateActiveNavLink);
+window.addEventListener('DOMContentLoaded', updateActiveNavLink);
+updateActiveNavLink(); // تشغيل فوري
+// =========================================================
+// إرسال الفوم عبر AJAX مع Loading Pop-up بدون إعادة توجيه
+// =========================================================
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnSpinner = document.getElementById('btnSpinner');
+
+        // 1. تفعيل حالة الـ Loading وتعطيل الزر لمنع الإرسال المتكرر
+        submitBtn.disabled = true;
+        btnText.textContent = 'Sending...';
+        btnSpinner.classList.remove('d-none');
+
+        const formData = new FormData(this);
+
+        // الإرسال عبر FormSubmit AJAX
+        fetch("https://formsubmit.co/ajax/davidsamir789@gmail.com", {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // 2. إظهار الـ Pop-up وإعادة ضبط الخانات
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+            contactForm.reset();
+        })
+        .catch(error => {
+            alert("Oops! Something went wrong while sending your message. Please try again.");
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            // 3. إرجاع الزر لحالته الطبيعية بعد انتهاء العملية
+            submitBtn.disabled = false;
+            btnText.textContent = 'Send Message';
+            btnSpinner.classList.add('d-none');
+        });
+    });
+}

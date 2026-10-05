@@ -160,9 +160,9 @@ section {
     line-height: 1.3 !important;
   }
   #header p {
-    font-size: 0.88rem !important;
-    line-height: 1.6 !important;
-    font-weight: 300 !important;
+    font-size: 1.1rem !important;
+    line-height: 1.7 !important;
+    font-weight: 500 !important;
     padding: 0 10px !important;
   }
   #header .d-flex {
@@ -171,8 +171,8 @@ section {
     gap: 12px !important;
   }
   #header .btn {
-    width: 85% !important;
-    max-width: 260px !important;
+    width: 90% !important;
+    max-width: 270px !important;
     padding: 10px !important;
     font-size: 0.9rem !important;
   }
