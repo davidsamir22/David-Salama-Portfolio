@@ -1,79 +1,50 @@
+// 1. أنيميشن الـ Progress Bars عند السكرول
 const progressDiv = document.querySelector(".progress-div"),
     progressBar = document.querySelectorAll(".progress-bar");
 
-ScrollOut({
-    targets: ".progress-div",
-});
+if (typeof ScrollOut !== "undefined") {
+    ScrollOut({ targets: ".progress-div" });
+}
 
 window.addEventListener("scroll", function () {
-    if (progressDiv.dataset.scroll == "in") {
+    if (progressDiv && progressDiv.dataset.scroll == "in") {
         progressBar.forEach(el => {
-            let valueNow = el.getAttribute("aria-valuenow")
+            let valueNow = el.getAttribute("aria-valuenow");
             el.style.width = valueNow + "%";
             let CounterSpan = el.parentElement.parentElement.querySelector(".progress-value span");
-            let Timer = setInterval(() => {
-                if (Number(CounterSpan.textContent) < valueNow) {
-                    CounterSpan.textContent = Number(CounterSpan.textContent) + 1;
-                }
-                else {
-                    clearInterval(Timer)
-                }
-            }, 500)
-        }
-        )
-    }
-    else {
+            if (CounterSpan) {
+                let Timer = setInterval(() => {
+                    if (Number(CounterSpan.textContent) < valueNow) {
+                        CounterSpan.textContent = Number(CounterSpan.textContent) + 1;
+                    } else {
+                        clearInterval(Timer);
+                    }
+                }, 20);
+            }
+        });
+    } else if (progressDiv) {
         progressBar.forEach(el => {
-            el.style.width = 0 + "%"
-            el.parentElement.parentElement.querySelector(".progress-value span").textContent = 0
-        } )
-        
-    }
-})
-// 1. إغلاق القائمة عند الضغط خارج الـ Navbar
-document.addEventListener('click', function (event) {
-    const navbarCollapse = document.getElementById('navbarNav');
-    const navbarToggler = document.querySelector('.navbar-toggler');
-    
-    // التأكد من أن القائمة مفتوحة وأن الضغط تم خارج القائمة وزر التبديل
-    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-        if (!navbarCollapse.contains(event.target) && !navbarToggler.contains(event.target)) {
-            const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse);
-            bsCollapse.hide();
-        }
+            el.style.width = 0 + "%";
+            let CounterSpan = el.parentElement.parentElement.querySelector(".progress-value span");
+            if (CounterSpan) CounterSpan.textContent = 0;
+        });
     }
 });
 
-// 2. إغلاق القائمة تلقائياً عند الضغط على أي رابط داخلها (Nav Link)
-document.querySelectorAll('.nav-link').forEach(function (link) {
-    link.addEventListener('click', function () {
-        const navbarCollapse = document.getElementById('navbarNav');
-        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-            const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse);
-            bsCollapse.hide();
-        }
-    });
-});
-
+// 2. الهبوط السلس مع خصم مسافة الـ Navbar
 document.querySelectorAll('a.nav-link[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const targetId = this.getAttribute('href');
-        
         if (targetId && targetId !== '#') {
             const targetElement = document.querySelector(targetId);
-            
             if (targetElement) {
-                e.preventDefault(); // منع القفز الافتراضي
-                
-                // حساب ارتفاع الـ Navbar تلقائياً على أي شاشة
+                e.preventDefault();
                 const navbar = document.querySelector('.navbar');
                 const navbarHeight = navbar ? navbar.offsetHeight : 80;
-                
-                // حساب موقع السكشن بدقة مع خصم ارتفاع الـ Navbar
                 const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
-                const offsetPosition = elementPosition - navbarHeight - 15; // 15px مسافة جمالية للأعلى
+                // ✅ السطر الصحيح لضبط بداية السيكشن تحت الناف بار بالظبط:
+                const offsetPosition = elementPosition - navbarHeight;
 
-                // الانتقال السلس للمكان الصحيح
                 window.scrollTo({
                     top: offsetPosition,
                     behavior: 'smooth'
@@ -83,10 +54,11 @@ document.querySelectorAll('a.nav-link[href^="#"]').forEach(anchor => {
     });
 });
 
+// 3. إغلاق القائمة في الموبايل عند الضغط خارجها أو على أي رابط
 document.addEventListener('click', function (event) {
     const navbarCollapse = document.getElementById('navbarNav');
     const navbarToggler = document.querySelector('.navbar-toggler');
-    
+
     if (navbarCollapse && navbarCollapse.classList.contains('show')) {
         if (!navbarCollapse.contains(event.target) && !navbarToggler.contains(event.target)) {
             const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse);
@@ -95,7 +67,6 @@ document.addEventListener('click', function (event) {
     }
 });
 
-// إغلاق القائمة عند الضغط على أي رابط
 document.querySelectorAll('.nav-link').forEach(function (link) {
     link.addEventListener('click', function () {
         const navbarCollapse = document.getElementById('navbarNav');
@@ -105,9 +76,8 @@ document.querySelectorAll('.nav-link').forEach(function (link) {
         }
     });
 });
-// =========================================================
-// تحديث الزر النشط (Active Link) في الناف بار تلقائياً أثناء السكرول (ScrollSpy)
-// =========================================================
+
+// 4. تفعيل زر السكشن النشط (Active Link) تلقائياً أثناء السكرول
 window.addEventListener('scroll', function () {
     const sections = document.querySelectorAll('section[id], header[id]');
     const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
@@ -117,7 +87,7 @@ window.addEventListener('scroll', function () {
     let currentSectionId = '';
 
     sections.forEach(section => {
-        const sectionTop = section.offsetTop - navbarHeight - 60; // إزاحة المسافة
+        const sectionTop = section.offsetTop - navbarHeight - 60;
         const sectionHeight = section.offsetHeight;
 
         if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
