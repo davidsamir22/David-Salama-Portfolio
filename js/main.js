@@ -105,3 +105,30 @@ document.querySelectorAll('.nav-link').forEach(function (link) {
         }
     });
 });
+// =========================================================
+// تحديث الزر النشط (Active Link) في الناف بار تلقائياً أثناء السكرول (ScrollSpy)
+// =========================================================
+window.addEventListener('scroll', function () {
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    const navbar = document.querySelector('.navbar');
+    const navbarHeight = navbar ? navbar.offsetHeight : 90;
+
+    let currentSectionId = '';
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - navbarHeight - 60; // إزاحة المسافة
+        const sectionHeight = section.offsetHeight;
+
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+            currentSectionId = section.getAttribute('id');
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (currentSectionId && link.getAttribute('href') === `#${currentSectionId}`) {
+            link.classList.add('active');
+        }
+    });
+});
